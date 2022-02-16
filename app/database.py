@@ -2,6 +2,7 @@
 import sqlite3
 import os
 import random
+import statistics
 
 # 3rd party
 from faker import Faker
@@ -97,16 +98,46 @@ class Database:
         
 
 def rows_to_list_of_dicts():
-    pass
+    output = []
+    columns = [
+        "id",
+        "first_name",
+        "last_name",
+        "age",
+        "gender",
+        "income",
+        "job_title"
+    ]
+    with Database("db.sqlite3") as db:
+        rows = db.query('SELECT * FROM people')
+    for row in rows:
+        output_row = {}
+        for index, column in enumerate(columns):
+            output_row[column] = row[index]
+        output.append(output_row)
+    return output
 
 
 def get_average_income():
-    pass
+    rows = rows_to_list_of_dicts()
+    incomes = [row["income"] for row in rows]
+    return statistics.mean(incomes)
 
 
 def get_clean_column_names():
-    pass
+    output = []
+    with Database("db.sqlite3") as db:
+        columns = db.query("PRAGMA table_info(people);")
+    for column in columns:
+        column = column[1].replace('_', ' ').title()
+        output.append(column)
+    return output
 
 
-def get_gender_counts():
-    pass
+def get_gender_count(gender):
+    output = 0
+    rows = rows_to_list_of_dicts()
+    for row in rows:
+        if row["gender"] == gender:
+            output += 1
+    return output

@@ -7,7 +7,7 @@ import app.database as database
 
 
 def test_rows_to_list_of_dicts():
-    rows = database.rows_to_dict()
+    rows = database.rows_to_list_of_dicts()
     expected ={ 
         "id": int,
         "first_name": str,
@@ -18,20 +18,22 @@ def test_rows_to_list_of_dicts():
         "job_title": str
     }
     for row in rows:
-        for expected_type, column in expected:
-            assert type(row.get(column)) == expected_type
+        for column in expected:
+            expected_type = expected[column]
+            t = type(row.get(column))
+            assert t == expected_type, f'Column {column} should be type {expected_type} but was type {t}'
 
 def test_get_incomes():
-    with Database("db.sqlite3") as db:
-        incomes = db.query("SELECT income FROM people")
-        expected_average = statistics.mean(incomes)
+    rows = database.rows_to_list_of_dicts()
+    incomes = [row["income"] for row in rows]
+    expected_average = statistics.mean(incomes)
     average_income = database.get_average_income()
-    assert average_income == expected_average
+    assert average_income == expected_average, f'Expected average of {expected_average} but got {average_income}'
 
 
 def test_get_clean_column_names():
     expected_columns = [
-        "Id"
+        "Id",
         "First Name",
         "Last Name",
         "Age",
@@ -43,11 +45,9 @@ def test_get_clean_column_names():
     assert column_names == expected_columns
 
 
-def test_get_gender_counts():
+def test_get_gender_count():
     with Database("db.sqlite3") as db:
-        genders = db.query("SELECT gender FROM people")
-        male_count = genders.count("male")
-        female_count = genders.count("female")
-    gender_counts = database.get_gender_counts()
-    assert gender_counts["male"] == male_count
-    assert gender_counts["female"] == female_count
+        response = db.query("SELECT gender FROM people WHERE gender = 'female'")
+        female_count = len(response)
+    count = database.get_gender_count("female")
+    assert count == female_count
