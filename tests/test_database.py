@@ -5,6 +5,9 @@ import statistics
 from app.database import Database
 import app.database as database
 
+# correct
+from answers.database import rows_to_list_of_dicts as get_correct_rows
+
 
 def test_rows_to_list_of_dicts():
     rows = database.rows_to_list_of_dicts()
@@ -24,7 +27,7 @@ def test_rows_to_list_of_dicts():
             assert t == expected_type, f'Column {column} should be type {expected_type} but was type {t}'
 
 def test_get_incomes():
-    rows = database.rows_to_list_of_dicts()
+    rows = get_correct_rows()
     incomes = [row["income"] for row in rows]
     expected_average = statistics.mean(incomes)
     average_income = database.get_average_income()

@@ -10,6 +10,21 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
+## Database
+The tests will automatically generate a [SQLite](https://www.sqlite.org/docs.html) database for you with the following form:
+```sql
+CREATE TABLE people 
+( 
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    first_name TEXT NOT NULL, 
+    last_name TEXT NOT NULL, 
+    age INTEGER NOT NULL, 
+    gender TEXT CHECK( gender IN ('male', 'female')) NOT NULL, 
+    income INTEGER NOT NULL, 
+    job_title TEXT NOT NULL 
+);
+```
+
 ## Testing
 Tests can be run with the following commands:
 ```bash

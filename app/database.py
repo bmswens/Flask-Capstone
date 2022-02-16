@@ -97,16 +97,59 @@ class Database:
 
 
 def rows_to_list_of_dicts():
+    """
+    A function that returns all records in the database as a 
+    list of dictionaries.
+    input:
+        None
+    output:
+        output - A list of dictionaries of form:
+    [
+        {
+            "id": 0,
+            "first_name": "John"
+            ...
+        }
+    ]
+    """
     pass
 
 
 def get_average_income():
+    """
+    A function to calculate the average income of all people.
+    input:
+        None
+    output:
+        output - A float or integer representing the average income
+    """
     pass
 
 
 def get_clean_column_names():
+    """
+    A funciton that returns as list of all the column names of the
+    'people' table in human readable format.
+    Ex. "first_name" -> "First Name"
+    input:
+        None
+    output:
+        output - A list of strings of form:
+    [
+        "First Name",
+        "Last Name",
+        ...
+    ]
+    """
     pass
 
 
 def get_gender_count(gender):
+    """
+    A function that returns the number of people with the target gender
+    input:
+        gender - A string, either "male" or "female"
+    outut:
+        output - An integer that represents the count of the gender
+    """
     pass
