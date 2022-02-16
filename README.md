@@ -40,4 +40,4 @@ Reports will be generated in the `reports` folder in `.html` format and can be v
 The project is complete when both `reports/pytest.html` and `reports/flake8/index.html` report no issues.
 
 ## Contributors
-- [Brandon Swenson](https://github.com/bmswens)
+- [Brandon Swenson](https://github.com/bmswens) - Author
