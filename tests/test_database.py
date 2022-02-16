@@ -50,4 +50,4 @@ def test_get_gender_count():
         response = db.query("SELECT gender FROM people WHERE gender = 'female'")
         female_count = len(response)
     count = database.get_gender_count("female")
-    assert count == female_count
+    assert count == female_count, f'Expected count of {female_count}, recieved {count}'

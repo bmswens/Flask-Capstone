@@ -22,7 +22,6 @@ class Database:
         if not os.path.exists(self.path):
             self.create_database()
 
-
     def __enter__(self):
         """
         Enables the "with X as Y:" syntax
@@ -44,20 +43,18 @@ class Database:
             self.connection = None
             self.cursor = None
 
-
     def query(self, query_string):
         self.cursor.execute(query_string)
         return self.cursor.fetchall()
 
-    
     def create_database(self):
         self.__enter__()
         table_creation = """
-        CREATE TABLE people 
+        CREATE TABLE people
         (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            first_name TEXT NOT NULL, 
-            last_name TEXT NOT NULL, 
+            first_name TEXT NOT NULL,
+            last_name TEXT NOT NULL,
             age INTEGER NOT NULL,
             gender TEXT CHECK( gender IN ('male', 'female')) NOT NULL,
             income INTEGER NOT NULL,
@@ -72,9 +69,11 @@ class Database:
             age = random.randint(18, 99)
             gender = random.choice(["male", "female"])
             income = random.randint(20000, 120000)
-            job_title = random.choice(["chef", "designer", "merchant", "programmer"])
+            job_title = random.choice(
+                ["chef", "designer", "merchant", "programmer"]
+                )
             row_creation = f"""
-            INSERT INTO people 
+            INSERT INTO people
             (
                 first_name,
                 last_name,
@@ -95,7 +94,7 @@ class Database:
             """
             self.cursor.execute(row_creation)
         self.__exit__(None, None, None)
-        
+
 
 def rows_to_list_of_dicts():
     output = []

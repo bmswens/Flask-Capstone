@@ -3,3 +3,4 @@ __pycache__
 .pytest*
 *.db
 *.sqlite3
+reports
