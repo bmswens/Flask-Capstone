@@ -1,4 +1,4 @@
-# custom 
+# custom
 from . import database
 
 # 3rd party
@@ -19,7 +19,6 @@ def standard_deviation(column):
     df = pd.json_normalize(rows)
     output = df["income"].std()
     return output
-    
 
 
 def variance(column):
