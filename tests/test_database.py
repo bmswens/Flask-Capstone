@@ -25,6 +25,7 @@ def test_rows_to_list_of_dicts():
             expected_type = expected[column]
             t = type(row.get(column))
             assert t == expected_type, f'Column {column} should be type {expected_type} but was type {t}'
+    assert len(rows) == 150, f'Expected 150 rows, recieved {len(rows}'
 
 def test_get_incomes():
     rows = get_correct_rows()
